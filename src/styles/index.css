@@ -1,0 +1,167 @@
+:root {
+  --bg-dark: #0D0710;
+  --bg-card: rgba(22, 10, 26, 0.78);
+  --bg-glass: rgba(255, 255, 255, 0.04);
+  --border-glass: rgba(255, 117, 143, 0.18);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --accent-burgundy: #590d22;
+  --accent-rose: #c9184a;
+  --accent-pink: #ff4d6d;
+  --accent-soft-pink: #ff758f;
+  --accent-blush: #ffb3c6;
+  --accent-glow: rgba(255, 77, 109, 0.35);
+
+  --text-primary: #fff0f3;
+  --text-secondary: #fcd5ce;
+  --text-muted: rgba(255, 225, 230, 0.6);
+  --text-quote: #ffe5ec;
+
+  --font-heading: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-cursive: 'Great Vibes', cursive;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-glow: 0 0 35px rgba(255, 77, 109, 0.25);
+  --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(201, 24, 74, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* TOTAL NO-SCROLL POLICY ACROSS ENTIRE WEBSITE */
+html, body {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  overflow: hidden !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y pinch-zoom;
+}
+
+/* Ambient Radial Background Glows */
+body::before {
+  content: '';
+  position: fixed;
+  top: -15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  max-width: 120vw;
+  height: 600px;
+  background: radial-gradient(circle, rgba(128, 15, 47, 0.22) 0%, rgba(201, 24, 74, 0.08) 45%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(89, 13, 34, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(50px);
+}
+
+#root, .app-container {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden !important;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* Typography Helpers */
+h1, h2, h3, .font-heading {
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.font-cursive {
+  font-family: var(--font-cursive);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Buttons and Interactive Elements */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+  color: inherit;
+  transition: var(--transition-smooth);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--accent-pink);
+  outline-offset: 3px;
+}
+
+/* Cinematic Keyframe Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 77, 109, 0.3), inset 0 0 15px rgba(255, 77, 109, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 77, 109, 0.6), inset 0 0 25px rgba(255, 77, 109, 0.3);
+  }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.15); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.1); }
+  70% { transform: scale(1); }
+}
+
+@keyframes swipeHintPulse {
+  0%, 100% { opacity: 0.5; transform: translateX(0); }
+  50% { opacity: 0.95; transform: translateX(4px); }
+}

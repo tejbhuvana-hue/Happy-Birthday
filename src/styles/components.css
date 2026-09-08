@@ -1,0 +1,838 @@
+/* Component & Layout Specific Styles - Strict 100vh No-Scroll Layout */
+
+/* ======================================================
+   AMBIENT CANVAS
+   ====================================================== */
+.ambient-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ======================================================
+   FLOATING MUSIC CONTROLLER
+   ====================================================== */
+.floating-music-btn {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: rgba(22, 10, 26, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.floating-music-btn:hover {
+  background: rgba(45, 16, 40, 0.9);
+  border-color: var(--accent-pink);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.music-waves {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 12px;
+}
+
+.music-wave-bar {
+  width: 2px;
+  background-color: var(--accent-pink);
+  border-radius: 2px;
+  animation: soundBar 1.2s infinite ease-in-out;
+}
+
+.music-wave-bar:nth-child(1) { height: 5px; animation-delay: 0.1s; }
+.music-wave-bar:nth-child(2) { height: 12px; animation-delay: 0.3s; }
+.music-wave-bar:nth-child(3) { height: 8px; animation-delay: 0.2s; }
+.music-wave-bar:nth-child(4) { height: 4px; animation-delay: 0.4s; }
+
+.music-waves.paused .music-wave-bar {
+  animation: none;
+  height: 3px;
+  opacity: 0.5;
+}
+
+@keyframes soundBar {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+
+.volume-slider {
+  width: 50px;
+  accent-color: var(--accent-pink);
+  cursor: pointer;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ======================================================
+   1. OPENING SCREEN (100vh fit, no scroll)
+   ====================================================== */
+.opening-screen {
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #170719 0%, #0D0710 100%);
+}
+
+.opening-content {
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 3vh, 26px);
+}
+
+.opening-step {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.opening-step.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.opening-subtext {
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 3.5vw, 2rem);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.35;
+  letter-spacing: 0.02em;
+}
+
+.opening-az-highlight {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 7.5vw, 4rem);
+  font-weight: 700;
+  color: var(--accent-pink);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 35px rgba(255, 77, 109, 0.5);
+  display: inline-block;
+  margin: 4px 0;
+}
+
+.opening-triad {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: #fff;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+  white-space: pre-line;
+}
+
+.opening-quote {
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 2.5vw, 1.05rem);
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  font-weight: 300;
+  max-width: 480px;
+}
+
+.btn-open-story {
+  margin-top: 8px;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  background: linear-gradient(135deg, #c9184a 0%, #ff4d6d 100%);
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 30px rgba(201, 24, 74, 0.45);
+  animation: pulseGlow 3s infinite ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: var(--transition-smooth);
+}
+
+.btn-open-story:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(255, 77, 109, 0.6);
+}
+
+/* ======================================================
+   2. ALPHABET INTRO SCREEN (100vh fit, no scroll)
+   ====================================================== */
+.intro-screen {
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.alphabet-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 480px;
+  margin-bottom: 24px;
+}
+
+.alphabet-letter {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  opacity: 0.4;
+  transition: all 0.5s ease;
+  width: 28px;
+  text-align: center;
+}
+
+.alphabet-letter.active {
+  opacity: 1;
+  color: var(--accent-pink);
+  transform: scale(1.25);
+  text-shadow: 0 0 15px var(--accent-pink);
+}
+
+.alphabet-letter.faded {
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.intro-focal-az {
+  font-family: var(--font-heading);
+  font-size: clamp(2.6rem, 9vw, 4.8rem);
+  font-weight: 700;
+  color: var(--accent-pink);
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 45px rgba(255, 77, 109, 0.6);
+  margin-bottom: 20px;
+}
+
+.intro-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 480px;
+}
+
+.intro-line {
+  font-family: var(--font-heading);
+  font-size: clamp(1.1rem, 3.2vw, 1.6rem);
+  font-style: italic;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 0.9s ease;
+}
+
+.intro-line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intro-line.highlight {
+  color: var(--accent-soft-pink);
+  font-weight: 600;
+}
+
+/* ======================================================
+   3. A-Z CHAPTER EXPERIENCE (Swipe & Full Height Fit)
+   ====================================================== */
+.chapter-container {
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 16px 14px;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  overflow: hidden !important;
+  cursor: grab;
+}
+
+.chapter-container:active {
+  cursor: grabbing;
+}
+
+/* Left & Right Edge Tap Zones */
+.swipe-touch-edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 14%;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.swipe-touch-edge.left { left: 0; }
+.swipe-touch-edge.right { right: 0; }
+
+.chapter-card-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 620px;
+  position: relative;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.chapter-card {
+  pointer-events: auto;
+  width: 100%;
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: clamp(16px, 3vh, 32px) clamp(16px, 4vw, 36px);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-height: 80vh;
+}
+
+.chapter-watermark {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-heading);
+  font-size: clamp(5rem, 16vh, 9.5rem);
+  font-weight: 700;
+  color: rgba(255, 77, 109, 0.05);
+  line-height: 0.8;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.chapter-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: clamp(6px, 1.5vh, 16px);
+}
+
+.chapter-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-blush);
+  margin-bottom: 2px;
+  opacity: 0.8;
+}
+
+.chapter-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.45rem, 4vw, 2.2rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Exact Telugu-English Locked Content */
+.chapter-text-box {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: clamp(6px, 1.5vh, 16px) 0 4px;
+  padding: clamp(10px, 2vh, 16px) clamp(12px, 3vw, 18px);
+  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.25);
+  border-left: 2px solid var(--accent-rose);
+  border-right: 2px solid var(--accent-rose);
+}
+
+.chapter-locked-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 2.7vh, 1.35rem);
+  color: var(--text-quote);
+  line-height: 1.75;
+  white-space: pre-line;
+  letter-spacing: 0.015em;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ======================================================
+   4. POLAROID CARD (Compact fit for 100vh)
+   ====================================================== */
+.polaroid-container {
+  position: relative;
+  z-index: 1;
+  margin: clamp(4px, 1vh, 12px) 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.polaroid-frame {
+  background: #ffffff;
+  padding: 8px 8px 16px;
+  border-radius: 4px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  transform: rotate(-1.5deg);
+  transition: transform 0.3s ease;
+  max-width: clamp(180px, 25vh, 250px);
+  width: 100%;
+  position: relative;
+}
+
+.polaroid-photo-wrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: 20vh;
+  overflow: hidden;
+  background: #150918;
+  position: relative;
+  border-radius: 2px;
+}
+
+.polaroid-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.polaroid-caption {
+  font-family: var(--font-cursive);
+  font-size: clamp(1.05rem, 2.2vh, 1.25rem);
+  color: #2b1122;
+  text-align: center;
+  margin-top: 6px;
+  line-height: 1.1;
+}
+
+.polaroid-tape {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(2deg);
+  width: 50px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+/* ======================================================
+   5. SWIPE NAVIGATION FOOTER
+   ====================================================== */
+.swipe-navigation-footer {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 6;
+  padding-bottom: 6px;
+  pointer-events: none;
+}
+
+.swipe-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 8px;
+}
+
+.chapter-counter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(26, 10, 30, 0.8);
+  border: 1px solid var(--border-glass);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-soft-pink);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.swipe-gesture-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  animation: swipeHintPulse 2.5s infinite ease-in-out;
+}
+
+.swipe-arrow-left, .swipe-arrow-right {
+  font-size: 1.1rem;
+  color: var(--accent-pink);
+}
+
+.swipe-progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.swipe-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #c9184a, #ff4d6d);
+  border-radius: 999px;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 8px var(--accent-pink);
+}
+
+/* ======================================================
+   6. SURPRISE SCREEN (After Chapter Z)
+   ====================================================== */
+.surprise-screen {
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 20px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #210822 0%, #0D0710 100%);
+}
+
+.surprise-content {
+  max-width: 540px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(14px, 2.8vh, 24px);
+  animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.surprise-icon-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 77, 109, 0.25) 0%, rgba(201, 24, 74, 0.05) 70%);
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 0 30px rgba(255, 77, 109, 0.35);
+  margin-bottom: 4px;
+}
+
+.surprise-gift-icon {
+  color: var(--accent-pink);
+  animation: heartbeat 2.2s infinite ease-in-out;
+}
+
+.surprise-sparkle-icon {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  color: var(--accent-soft-pink);
+  animation: floatGentle 2s infinite ease-in-out;
+}
+
+.surprise-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 5.5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  text-shadow: 0 0 25px rgba(255, 77, 109, 0.4);
+}
+
+.surprise-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 3.2vw, 1.45rem);
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 460px;
+}
+
+.btn-surprise {
+  margin-top: 10px;
+  padding: 16px 44px;
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+}
+
+/* ======================================================
+   7. VIDEO INTERLUDE SCREEN (100vh fit, no scroll)
+   ====================================================== */
+.video-interlude-screen {
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  overflow: hidden;
+}
+
+.video-intro-text {
+  max-width: 520px;
+  margin-bottom: 14px;
+}
+
+.video-intro-line1 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.video-intro-line2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--accent-soft-pink);
+}
+
+.video-player-container {
+  width: 100%;
+  max-width: 580px;
+  aspect-ratio: 16 / 9;
+  max-height: 48vh;
+  background: #000;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 77, 109, 0.25);
+  border: 1px solid var(--border-glass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-player-element {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: #000;
+}
+
+.video-outro-text {
+  margin-top: 12px;
+  max-width: 480px;
+}
+
+.video-outro-line {
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-style: italic;
+  color: var(--text-quote);
+  margin-bottom: 10px;
+}
+
+/* ======================================================
+   8. CINEMATIC FINALE SCREEN (100vh fit, no scroll)
+   ====================================================== */
+.finale-screen {
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  background: radial-gradient(circle at center, #19081c 0%, #0D0710 100%);
+}
+
+.finale-content {
+  max-width: 580px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1.8vh, 18px);
+}
+
+.finale-monogram {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  font-weight: 700;
+  color: var(--accent-pink);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 35px rgba(255, 77, 109, 0.6);
+}
+
+.finale-sequence-line {
+  font-family: var(--font-heading);
+  font-size: clamp(1.15rem, 3vw, 1.7rem);
+  font-style: italic;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.finale-sequence-line.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.finale-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 18px;
+  margin: 4px 0;
+}
+
+.finale-cluster-item {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 2.6vw, 1.4rem);
+  color: var(--accent-soft-pink);
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+.finale-symbol {
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  margin: 4px 0;
+  animation: heartbeat 2.5s infinite ease-in-out;
+  display: inline-block;
+}
+
+.finale-closing-text {
+  font-family: var(--font-heading);
+  font-size: clamp(0.95rem, 2.5vw, 1.25rem);
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 440px;
+}
+
+.btn-replay-story {
+  margin-top: 10px;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  background: linear-gradient(135deg, #c9184a 0%, #ff4d6d 100%);
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 25px rgba(201, 24, 74, 0.45);
+  animation: pulseGlow 3s infinite ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ======================================================
+   MOBILE OPTIMIZATIONS (Strict No-Scroll Fit)
+   ====================================================== */
+@media (max-width: 640px) {
+  .chapter-container {
+    padding: 44px 12px 10px;
+  }
+  
+  .chapter-card {
+    padding: 14px 12px;
+    border-radius: var(--radius-md);
+  }
+
+  .chapter-text-box {
+    padding: 8px 10px;
+    margin: 6px 0 2px;
+  }
+
+  .chapter-locked-text {
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+
+  .polaroid-frame {
+    max-width: 170px;
+    padding: 6px 6px 12px;
+  }
+
+  .polaroid-caption {
+    font-size: 1.05rem;
+  }
+
+  .floating-music-btn {
+    top: 10px;
+    right: 10px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+  }
+  
+  .volume-slider {
+    display: none;
+  }
+}
